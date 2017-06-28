@@ -1,7 +1,5 @@
-SeisFlows-HPC
-=============
-
-WARNING: NOT YET WORKING
+SeisFlows-HPC (WARNING: NOT YET WORKING)
+========================================
 
 Extension to the main SeisFlows package
 
@@ -16,6 +14,6 @@ Extension to the main SeisFlows package
 
 Once the main SeisFlows package and its depedenciese are installed, installation of the extension package is very simple:
 ```
-git clone https://github.com/rmodrak/seisflows-multiparameter.git /path/to/seisflow-multiparameter
+git clone https://github.com/rmodrak/seisflows-multiparameter.git /path/to/seisflows-multiparameter
 export PYTHONPATH=$PYTHONPATH:/path/to/seisflows-multiparameter
 ```
