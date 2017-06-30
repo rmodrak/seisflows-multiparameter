@@ -1,5 +1,9 @@
-SeisFlows-HPC (WARNING: NOT YET WORKING)
-========================================
+(WARNING: NOT YET WORKING)
+==========================
+
+
+SeisFlows-HPC 
+-------------
 
 Extension to the main SeisFlows package
 
@@ -12,7 +16,7 @@ Extension to the main SeisFlows package
 - provides ready-to-go anisotropic inversion capabilities for SPECFEM2D and SPECFEM3D
 
 
-Once the main SeisFlows package and its depedenciese are installed, installation of the extension package is very simple:
+Once the main SeisFlows package is installed, installation of the extension package is simple:
 ```
 git clone https://github.com/rmodrak/seisflows-multiparameter.git /path/to/seisflows-multiparameter
 export PYTHONPATH=$PYTHONPATH:/path/to/seisflows-multiparameter
