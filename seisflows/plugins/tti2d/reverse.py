@@ -1,5 +1,7 @@
 
-def Voight_TTT_2d(dummy, keys, vals):
+
+
+def Thomsen(dummy, keys, vals):
     input = Struct(zip(keys, vals))
     output = Struct()
 
@@ -30,4 +32,8 @@ def Voight_TTT_2d(dummy, keys, vals):
     output.c33 = c11*sint**4 + c33*cost**4 + 2*c13*sint**2*cost**2 + c55*sin2t**2
     output.c35 = ((c11-c13)*sint**2 + (c13-c33)*cost**2)*sint*cost + c55*sin2t*cos2t
     output.c55 = (c11 - 2.*c13+c33)*sint**2*cost**2 + c55*cos2t**2
+
+
+def ChenTromp(dummy, keys, vals):
+    raise NotImplementedError
 

@@ -9,8 +9,6 @@ from seisflows.tools.tools import Struct
 
 
 
-### isotropic maps
-
 def phi_beta(dummy, keys, vals):
     input = Struct(zip(keys, vals))
     output = Struct()
