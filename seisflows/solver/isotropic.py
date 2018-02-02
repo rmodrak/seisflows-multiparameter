@@ -3,11 +3,13 @@ import sys
 
 from os.path import join
 
-from seisflows.plugins import io
-from seisflows.tools.seismic import ModelDict
+import seisflows.plugins.isotropic.forward
+import seisflows.plugins.isotropic.reverse
+
+from seisflows.tools.seismic import Container
 
 from seisflows.tools import unix
-from seisflows.tools.tools import exists
+from seisflows.tools.tools import exists, Struct
 from seisflows.config import ParameterError, custom_import
 
 PAR = sys.modules['seisflows_parameters']
@@ -99,20 +101,24 @@ class isotropic(custom_import('solver', 'base')):
         parameters += ['vs']
 
 
-    if PAR.MATERIALS  not in plugins.isotropic.forward:
+    if not hasattr(seisflows.plugins.isotropic.forward, PAR.MATERIALS):
       raise Exception
 
-    if PAR.MATERIALS  not in plugins.isotropic.reverse:
+    if not hasattr(seisflows.plugins.isotropic.reverse, PAR.MATERIALS):
       raise Exception
 
 
-    @property
-    def forward(key):
-       return getattr(plugins.isotropic.forward, PAR.MATERIALS)
+    @staticmethod
+    def forward(self, key):
+       return getattr(seisflows.plugins.isotropic.forward, PAR.MATERIALS)
 
-    @property
-    def inverse(key):
-       return getattr(plugins.isotropic.reverse, PAR.MATERIALS)
+    @staticmethod
+    def inverse(self, key):
+       return getattr(seisflows.plugins.isotropic.reverse, PAR.MATERIALS)
+
+
+    def check_mesh_properties(self, path=None, parameters=['vp','vs','rho']):
+        super(isotropic, self).check_mesh_properties(path, parameters)
 
 
     def load(self, path, parameters=['vp','vs','rho'],
@@ -120,12 +126,14 @@ class isotropic(custom_import('solver', 'base')):
         """ Reads isotropic elastic model and optionally converts to a
          different parameter set
         """
+        print 'MADE IT HERE!!!'
         dict = Container()
 
         # read slices
         nproc = self.mesh_properties.nproc
         for iproc in range(nproc):
-            for key in prameters:
+            for key in parameters:
+                print 'KEY', key
                 key = prefix+key+suffix
                 dict[key] = self.io.read_slice(path, key, iproc)
 
@@ -151,5 +159,4 @@ class isotropic(custom_import('solver', 'base')):
         for key, val in dict.items():
             key = prefix+key+suffix
             self.io.write_slice(val, path, key, iproc)
-
 
