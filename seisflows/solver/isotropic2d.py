@@ -23,7 +23,7 @@ class isotropic2d(custom_import('solver', 'specfem2d')):
     """
 
     def check(self):
-        super(isotropic, self).check()
+        super(isotropic2d, self).check()
 
         if not hasattr(forward, PAR.MATERIALS):
           raise Exception
@@ -161,7 +161,7 @@ class isotropic2d(custom_import('solver', 'specfem2d')):
 
     def check_mesh_properties(
             self, path=None, parameters=['vp','vs','rho']):
-        super(isotropic, self).check_mesh_properties(
+        super(isotropic2d, self).check_mesh_properties(
             path, parameters)
 
 

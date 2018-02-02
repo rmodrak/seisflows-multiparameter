@@ -3,8 +3,8 @@ import sys
 
 from os.path import join
 
-import seisflows.plugins.isotropic.forward as forward
-import seisflows.plugins.isotropic.reverse as reverse
+import seisflows.plugins.anisotropic3d.forward as forward
+import seisflows.plugins.anisotropic3d.reverse as reverse
 
 from seisflows.tools.seismic import Container
 
@@ -20,12 +20,12 @@ raise NotImplementedError
 TTI3D = []
 
 
-class anisotropic2d(custom_import('solver', 'specfem2d')):
+class ananisotropic3d2d(custom_import('solver', 'specfem2d')):
     """ Adds 3D TTI machinery
     """
 
     def check(self):
-        super(isotropic, self).check()
+        super(anisotropic3d, self).check()
 
         if not hasattr(forward, PAR.MATERIALS):
           raise Exception
@@ -36,7 +36,7 @@ class anisotropic2d(custom_import('solver', 'specfem2d')):
         assert PAR.MATERIALS in [
             'ChenTromp2d',
             'Thomsen2d',
-            'Voigt2d'
+            'TTI3D'
             ]
 
 
@@ -81,7 +81,7 @@ class anisotropic2d(custom_import('solver', 'specfem2d')):
 
 
 
-    def load(self, path, parameters=VOIGT2D,
+    def load(self, path, parameters=TTI3D,
              prefix='', suffix=''):
         dict = Container()
 
@@ -91,20 +91,20 @@ class anisotropic2d(custom_import('solver', 'specfem2d')):
                 key = prefix+key+suffix
                 dict[key] = self.io.read_slice(path, key, iproc)
 
-        if parameters==VOIGT2D:
+        if parameters==TTI3D:
             dict.map(self.forward, nproc)
 
         return dict
 
 
-    def save(self, dict, path, parameters=VOIGT2D,
+    def save(self, dict, path, parameters=TTI3D,
              prefix='', suffix=''):
         nproc = self.mesh_properties.nproc
         if ['rho'] not in parameters:
             for iproc in range(nproc):
                 dict['rho'] = self.io.read_slice(PATH.MODEL_INIT, 'rho', iproc)
 
-        if parameters!=VOIGT2D:
+        if parameters!=TTI3D:
             dict.map(self.reverse, nproc)
 
         nproc = self.mesh_properties.nproc
@@ -122,8 +122,8 @@ class anisotropic2d(custom_import('solver', 'specfem2d')):
        return getattr(reverse, PAR.MATERIALS)(*args)
 
     def check_mesh_properties(
-            self, path=None, parameters=VOIGT2D):
-        super(isotropic, self).check_mesh_properties(
+            self, path=None, parameters=TTI3D):
+        super(tti3d, self).check_mesh_properties(
             path, parameters)
 
 

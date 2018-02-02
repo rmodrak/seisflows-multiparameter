@@ -3,8 +3,8 @@ import sys
 
 from os.path import join
 
-import seisflows.plugins.isotropic.forward as forward
-import seisflows.plugins.isotropic.reverse as reverse
+import seisflows.plugins.anisotropic2d.forward as forward
+import seisflows.plugins.anisotropic2d.reverse as reverse
 
 from seisflows.tools.seismic import Container
 
@@ -26,7 +26,7 @@ class anisotropic2d(custom_import('solver', 'specfem2d')):
     """
 
     def check(self):
-        super(isotropic, self).check()
+        super(anisotropic2d, self).check()
 
         if not hasattr(forward, PAR.MATERIALS):
           raise Exception
@@ -116,7 +116,7 @@ class anisotropic2d(custom_import('solver', 'specfem2d')):
 
     def check_mesh_properties(
             self, path=None, parameters=VOIGT2D):
-        super(isotropic, self).check_mesh_properties(
+        super(anisotropic2d, self).check_mesh_properties(
             path, parameters)
 
 
