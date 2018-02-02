@@ -1,0 +1,4 @@
+
+WORKFLOW='test_isotropic'
+SOLVER='specfem2d'
+
