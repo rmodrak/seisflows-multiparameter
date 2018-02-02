@@ -15,23 +15,43 @@ solver = sys.modules['seisflows_solver']
 
 
 
-class test_postprocess(base):
+class test_isotropic(base):
     """ Postprocessing class
     """
 
     def check(self):
         """ Checks parameters and paths
         """
-        if 'MODEL' not in PATH:
-            setattr(PATH, 'MODEL', None)
+        if not hasattr(PAR, 'MATERIALS'):
+            raise Exception
+
+        # dummy parameters
+        if 'MODEL_INIT' not in PATH:
+            setattr(PATH, 'MODEL_INIT', PATH.MODEL_INPUT)
+
+        for key in ['NT','DT','F0']:
+            if not hasattr(PAR, 'NT'): PAR[key]=0
+
+        if not hasattr(PAR, 'FORMAT'):
+            PAR.FORMAT=None
 
 
     def main(self):
         """ 
         """
-        forward = getattr(forward, materials)
-        reverse = getattr(reverse, materials)
-        model1 = solver.load(PATH.MODEL)
-        model2 = deepcopy(model1)
-        model2 = model.apply(forward).apply(reverse)
+        try:
+            model = solver.load(PATH.MODEL_INPUT)
+        except:
+            raise Exception("Error reading isotropic model.")
+
+        try:
+            solver.save(model, PATH.MODEL_OUTPUT)
+        except:
+            raise Exception("Error writing isotropic model.")
+
+
+        # check if input/output models are the same
+        #raise NotImplemenetedError
+
+
 

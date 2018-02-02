@@ -9,7 +9,9 @@ WD="$PWD/setup/test_isotropic"
 
 
 # adjust paths
-sed -i "s:^MODEL.*=.*:MODEL = '$WD/models/marmousi':" $WD/paths
+sed -i "s:^MODEL_INPUT.*=.*:MODEL_INPUT = '$WD/models/input':" $WD/paths
+sed -i "s:^MODEL_OUTPUT.*=.*:MODEL_OUTPUT = '$WD/models/output':" $WD/paths
+
 
 
 # run tests

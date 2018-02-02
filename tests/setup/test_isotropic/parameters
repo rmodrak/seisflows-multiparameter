@@ -1,4 +1,8 @@
 
 WORKFLOW='test_isotropic'
-SOLVER='specfem2d'
+SOLVER='isotropic2d'
+SYSTEM='serial'
+MATERIALS='phi_beta'
+DENSITY='Constant'
+NPROC=1
 

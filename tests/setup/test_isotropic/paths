@@ -1,4 +1,11 @@
 
-MODEL = '~/seisflows-multiparameter/tests/setup/test_isotropic/models/marmousi'
+MODEL_INPUT = '~/seisflows-multiparameter/tests/setup/test_isotropic/models/input'
+
+MODEL_OUTPUT = '~/seisflows-multiparameter/tests/setup/test_isotropic/models/output'
+
+
+SPECFEM_BIN = ''
+
+SPECFEM_DATA = ''
 
 
