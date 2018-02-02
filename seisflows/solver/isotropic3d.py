@@ -16,7 +16,7 @@ PAR = sys.modules['seisflows_parameters']
 PATH = sys.modules['seisflows_paths']
 
 
-class isotropic2d(custom_import('solver', 'specfem2d')):
+class isotropic3d(custom_import('solver', 'specfem3d')):
     """ Adds isotropic elastic inversion machinery
 
        Must supply a model in vp,vs,rho
